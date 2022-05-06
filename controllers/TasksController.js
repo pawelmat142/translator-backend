@@ -30,14 +30,15 @@ exports.addTask = async (req, res) => {
     const {userId} = req
     try {
 
+        console.log('add task')
+        console.log(req.body.deadline)
         if (!req.body) throw new Error('body - pusto')
         if (!req.body.name) throw new Error('add task - pusto')
-        if (!req.body.deadline) throw new Error('add task - pusto')
 
         let task = new Task({
             userId: userId,
             name: req.body.name,
-            deadline: new Date(req.body.deadline),
+            deadline: req.body.deadline ? new Date(req.body.deadline) : '',
             done: false,
             subtasks: req.body.subtasks? req.body.subtasks : '',
         })

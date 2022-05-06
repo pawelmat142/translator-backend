@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const User = require('../models/User')
-const jwtExpireTime = '20m'
+const jwtExpireTime = '1 day'
 
 
 exports.jwtAuthorization = (req, res, next) => {
