@@ -13,9 +13,10 @@ exports.tasks = async (req, res) => {
                 id: task._id.toString(),
                 userId: task.userId.toString(),
                 name: task.name,
+                important: task.important,
                 deadline: task.deadline,
                 done: task.done,
-                subtasks: task.subtasks
+                subtasks: task.subtasks,
             }
         })
         res.status(200).json(tasksResponse)
@@ -30,14 +31,13 @@ exports.addTask = async (req, res) => {
     const {userId} = req
     try {
 
-        console.log('add task')
-        console.log(req.body.deadline)
         if (!req.body) throw new Error('body - pusto')
         if (!req.body.name) throw new Error('add task - pusto')
 
         let task = new Task({
             userId: userId,
             name: req.body.name,
+            important: false,
             deadline: req.body.deadline ? new Date(req.body.deadline) : '',
             done: false,
             subtasks: req.body.subtasks? req.body.subtasks : '',
@@ -166,6 +166,33 @@ exports.markAsDone = async (req, res) => {
 
 
 
+exports.markAsImportant = async (req, res) => {
+
+    const {userId} = req
+    const taskId = req.query._id
+
+    try {
+
+        if(!req.body.hasOwnProperty('important')) {
+            throw new Error('body empty')
+        }
+
+        await Task.updateOne({
+            _id: new ObjectID(taskId),
+            userId: new ObjectID(userId)
+        }, {
+            $set: { important: req.body.important }
+        })
+
+        res.status(200).json()
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: error.message})
+    }
+}
+
+
 exports.updateSubtasks = async (req, res) => {
 
     const {userId} = req
@@ -177,7 +204,7 @@ exports.updateSubtasks = async (req, res) => {
             throw new Error('body empty')
         } 
 
-        await Task.updateOne({
+        let a = await Task.updateOne({
             _id: new ObjectID(taskId),
             userId: new ObjectID(userId)
         }, {
@@ -218,11 +245,7 @@ exports.reorder = async (req, res) => {
         console.log(error)
         res.status(500).json({message: error.message})
     }
-
-
 }
-
-
 
 
 exports.taskValidate = [

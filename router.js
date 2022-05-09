@@ -63,6 +63,12 @@ router.patch('/done?:_id',
 )
 
 
+router.patch('/important?:_id',
+    usersController.jwtAuthorization,
+    tasksController.markAsImportant
+)
+
+
 router.patch('/subtasks?:_id',
     usersController.jwtAuthorization,
     tasksController.updateSubtasks

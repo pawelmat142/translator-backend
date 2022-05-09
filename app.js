@@ -16,6 +16,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', router)
 
-const port = process.env.PORT || 3000
-// const port = 3333
+// const port = process.env.PORT || 3000
+const port = 3333
 app.listen(port, () => console.log('to-do list app listening on port: ' + port))
