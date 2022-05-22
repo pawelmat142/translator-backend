@@ -8,5 +8,23 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.2"
-  }
+  },
+  "name": "translate-tool-node",
+  "description": "Simple To-Do List app that will help me organize the next days.",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawelmat142/ToDo-List-Full.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pawelmat142/ToDo-List-Full/issues"
+  },
+  "homepage": "https://github.com/pawelmat142/ToDo-List-Full#readme"
 }
